@@ -47,7 +47,7 @@
                                 @foreach ($tenants as $tenant)
                                     <tr>
                                         <td>{{ $tenant->id }}</td>
-                                        <td><a href="http://{{ $tenant->domains->first()->domain ??  '' }}" target="_blank" rel="noopener noreferrer"></a>{{ $tenant->domains->first()->domain ??  '' }}</td>
+                                        <td><a href="http://{{ $tenant->domains->first()->domain ??  '' }}" target="_blank" rel="noopener noreferrer">{{ $tenant->domains->first()->domain ??  '' }}</a></td>
 
 
                                         <td>
