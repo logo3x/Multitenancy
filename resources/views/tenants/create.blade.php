@@ -9,6 +9,16 @@
 @section('content')
 <div class="card">
     <div class="card-body">
+        @if (count($errors) > 0)
+                    <div class="alert alert-info">
+
+                        <ul>
+                            @foreach ($errors->all() as $message)
+                                <li>{{ $message }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
         <form action="{{ route('tenants.store') }}" method="post">
             @csrf

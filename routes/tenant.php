@@ -2,9 +2,17 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Clientes\Home;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+
+use App\Http\Controllers\UsuarioController;
+
+
+//Spatie
+use App\Http\Controllers\RolController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +39,14 @@ Route::middleware([
         Route::get('/dashboard',function(){
             return view('clientes.dashboard');
         })->name('dashboard');
+
+        Route::resource('roles',RolController::class);
+        Route::resource('usuarios',UsuarioController::class);
+        Route::resource('/home',Home::class);
+
     });
 
     Auth::routes();
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    /* Route::get('/home', [App\Http\Controllers\Clientes\HomeControllerClientes::class, 'index'])->name('home'); */
 
 });

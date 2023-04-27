@@ -1,7 +1,14 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TenantController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\UsuarioController;
+
+//Spatie
+use App\Http\Controllers\RolController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +28,9 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
     Route::resource('tenants',TenantController::class);
+    Route::resource('roles',RolController::class);
+    Route::resource('usuarios',UsuarioController::class);
+    Route::resource('/home',HomeController::class);
 
 });
 
@@ -28,4 +38,4 @@ Route::middleware('auth')->group(function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/* Route::get('/home', [App\Http\Controllers\ClienteController::class, 'index'])->name('home'); */

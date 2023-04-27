@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
+
+//agregamos el modelo de permisos de spatie
+use Spatie\Permission\Models\Permission;
 
 class TenantController extends Controller
 {
@@ -30,15 +34,21 @@ class TenantController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'id' => 'required|unique:tenants'
+        ],
+        $messages = [
+            'id.unique' => 'Nombre del cliente ya se encuentra registrado',
+            'id.required' => 'Nombre de Cliente es requerido',
         ]);
 
         $tenant = Tenant::create($request->all());
-
         $tenant->domains()->create([
             'domain' => $request->get('id'). '.'. 'teamforcex.com.co',
         ]);
+
+
 
 
         return redirect(route('tenants.index'));
@@ -86,6 +96,11 @@ class TenantController extends Controller
      */
     public function destroy(Tenant $tenant)
     {
+
+    
+        $cliente=Cliente::where('dominio','=',$tenant->id)->delete();
+
+
         $tenant->delete();
         return redirect(route('tenants.index'));
     }

@@ -169,6 +169,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TenancyServiceProvider::class,
+
+        // ...
+        Spatie\Permission\PermissionServiceProvider::class,
     ])->toArray(),
 
     /*
