@@ -132,11 +132,15 @@ class CreatePermissionTables extends Migration
                 'crear-rol',
                 'editar-rol',
                 'borrar-rol',
-                //Operacions sobre tabla blogs
+                //Operacions sobre tabla usuarios
                 'ver-usuarios',
                 'crear-usuarios',
                 'editar-usuarios',
-                'borrar-usuarios'
+                'borrar-usuarios',
+                //Operaciones sobre Informacion del la empresa (Cliente)
+                'ver-cliente',
+                'editar-cliente',
+                
             ];
 
 

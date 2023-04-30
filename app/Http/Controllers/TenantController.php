@@ -88,6 +88,9 @@ class TenantController extends Controller
         $tenant->domains()->update([
             'domain' => $request->get('id'). '.'. 'teamforcex.com.co',
         ]);
+        $dominiocliente=Cliente::where('dominio','=', $request->get('old_domain'));
+        $dominiocliente->update(['dominio' => $request->get('id')]);
+
         return redirect(route('tenants.index'));
     }
 
@@ -97,7 +100,7 @@ class TenantController extends Controller
     public function destroy(Tenant $tenant)
     {
 
-    
+
         $cliente=Cliente::where('dominio','=',$tenant->id)->delete();
 
 

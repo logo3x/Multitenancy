@@ -1,64 +1,117 @@
 @extends('adminlte::page')
+@section('plugins.Sweetalert2', true)
+
 
 @section('title', 'Bienvenido')
 
 @section('content_header')
-    <h1>Bienvenido</h1>
+    <h1>Hola, Bienvenido.</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+
 
 
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
 
+                @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+
 
                 @if ($cliente->count())
 
-                    Ya tienes un dominio creado con los siguientes datos <br>
 
-                    <table class="table">
-                        <thead class="thead">
-                            <tr>
+                    @foreach ($cliente as $client)
+                    <p>Tienes un dominio creada con el estado <strong>{{ $client->estado }}</strong> y registra los siguientes datos</p> <br>
 
 
-                                <th>Usuario</th>
-                                <th>Dominio</th>
-                                <th>Empresa</th>
-                                <th>Contacto</th>
-                                <th>Telefono</th>
-                                <th>Telefono2</th>
-                                <th>Direccion</th>
-                                <th>Email</th>
-                                <th>Nit</th>
-                                <th>Actividad</th>
-                                <th>Plan</th>
-                                <th>Metodo Pago</th>
-                                <th>Estado</th>
+                    <div class="container shadow"><br>
+                        <div class="float-right">
+                            <a class="btn btn-sm btn-success" href="{{ route('home.edit',$client->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Actualizar') }}</a>
+                        </div><br>
+                        <div class="row">
+                          <div class="col-sm">
+                            <label for="Usuario">Usuario</label> <br>
+                            {{ $client->user->email }}
+                          </div>
+                          <div class="col-sm">
+                            <label for="Dominio">Dominio</label><br>
+                            <a href="http://{{$client->dominio}}.teamforcex.com.co" target="_blank" rel="noopener noreferrer">{{ $client->dominio }}.teamforcex.com.co</a>
+                          </div>
+                          <div class="col-sm">
+                           <label for="Empresa">Empresa</label><br>
+                           {{ $client->empresa }}
+                          </div>
+                          <div class="col-sm">
+                            <label for="Contacto">Contacto</label><br>
+                            {{ $client->contacto }}
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm">
+                              <label for="Telefono">Telefono</label><br>
+                              {{ $client->telefono }}
+                            </div>
+                            <div class="col-sm">
+                              <label for="Telefono2">Telefono2</label><br>
+                              {{ $client->telefono2 }}
+                            </div>
+                            <div class="col-sm">
+                             <label for="Direccion">Direccion</label><br>
+                             {{ $client->direccion }}
+                            </div>
+                            <div class="col-sm">
+                              <label for="Email">Email</label><br>
+                              {{ $client->email }}
+                            </div>
+                          </div>
+                          <br>
+                          <div class="row">
+                            <div class="col-sm">
+                              <label for="Nit">Nit</label><br>
+                              {{ $client->nit }}
+                            </div>
+                            <div class="col-sm">
+                              <label for="Actividad">Actividad</label><br>
+                              {{ $client->actividad }}
+                            </div>
+                            <div class="col-sm">
+                             <label for="Plan">Plan</label><br>
+                             {{ $client->plan }}
+                            </div>
+                            <div class="col-sm">
+                              <label for="Metodo Pago">Metodo Pago</label><br>
+                              {{ $client->metodo_pago }}
+                            </div>
+                          </div>
+                          <br> <br> <br>
+                          <div class="row">
+                            <div class="col-sm">
 
-                                <th></th>
-                            </tr>
-                        </thead>
-                        @foreach ($cliente as $client)
-                            <tr>
-                                <td>{{ $client->user->email }}</td>
-                                <td><a href="http://{{$client->dominio}}.teamforcex.com.co" target="_blank" rel="noopener noreferrer">{{ $client->dominio }}.teamforcex.com.co</a></td>
-                                <td>{{ $client->empresa }}</td>
-                                <td>{{ $client->contacto }}</td>
-                                <td>{{ $client->telefono }}</td>
-                                <td>{{ $client->telefono2 }}</td>
-                                <td>{{ $client->direccion }}</td>
-                                <td>{{ $client->email }}</td>
-                                <td>{{ $client->nit }}</td>
-                                <td>{{ $client->actividad }}</td>
-                                <td>{{ $client->plan }}</td>
-                                <td>{{ $client->metodo_pago }}</td>
-                                <td>{{ $client->estado }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
+                                <form action="{{ route('home.destroy',$client->id) }}"  class="formulario-eliminar" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm " ><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar Dominio') }} </button>
+                                </form>
+                            </div>
+                          </div>
+                          <br>
+                      </div>
+                      @endforeach
+
+
+
+
+
+
+
+
                 @else
                     @includeif('partials.errors')
 
@@ -100,7 +153,7 @@
                                                     <span class="input-group-text"
                                                         id="basic-addon2">.teamforcex.com.co</span>
                                                 </div>
-                                                {!! $errors->first('dominio', '<div class="invalid-feedback">:message</div>') !!}
+                                                {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
                                             </div>
                                         </div>
                                     </div>
@@ -194,7 +247,7 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            Panes
+                                            Planes
                                             <img src="" alt="">
                                         </div>
                                     </div>
@@ -230,5 +283,46 @@
 @stop
 
 @section('js')
+@if ( Session::get('success')=='Su Dominio ha sido Creado Satisfactoriamente.')
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Felicidades tu dominio se ha generado, Muchas gracias por confiar en nosotros.',
+            showConfirmButton: false,
+            timer: 4500
+            })
+    </script>
+@endif
+
+@if ( Session::get('success')=='El Dominio se ha Eliminado de la Base de Datos')
+    <script>
+        Swal.fire(
+                'Eliminado!',
+                'El dominio se elimino del registro.',
+                'success'
+                )
+    </script>
+@endif
+<script>
+    $('.formulario-eliminar').submit(function(e){
+        e.preventDefault();
+        Swal.fire({
+        title: '¿Estas seguro?',
+        text: "Se eliminara la base de datos ¡No podrás revertir esto.!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminarlo!',
+        cancelButtonText: 'Cancelar',
+        }).then((result) => {
+        if (result.isConfirmed) {
+            this.submit();
+        }
+        })
+    });
+</script>
+
 
 @stop

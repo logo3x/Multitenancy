@@ -22,6 +22,7 @@
                 <label for="name">Nombre</label>
                 <input class="form-control" value="{{ old('id',$tenant->id ) }}" name="id" type="text" placeholder="Nombre" />
                 {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
+                <input type="hidden" name="old_domain" value="{{ $tenant->id  }}">
 
             </div>
 

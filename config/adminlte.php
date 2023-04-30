@@ -306,14 +306,22 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ], */
-        [
+       /*  [
             'text' => 'Inquilinos',
             'url'  => 'tenants',
             'can'  => 'Limitado',
             'icon' => 'fas fa-building',
-        ],
+        ], */
 
         ['header' => 'account_settings'],
+        [
+            'text' => 'Cuenta',
+            'url'  => 'home',
+            'icon' => 'fas fa-building',
+            'can'  => 'ver-cliente' ,
+            'icon_color' => 'info',
+
+        ],
         [
             'text' => 'Usuarios',
             'url'  => 'usuarios',
@@ -419,7 +427,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],

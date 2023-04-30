@@ -50,7 +50,7 @@ class Cliente extends Model implements HasMedia
      *
      * @var array
      */
-    protected $fillable = ['id_user','dominio','empresa','contacto','telefono','telefono2','direccion','email','nit','actividad','plan','metodo_pago','estado'];
+    protected $fillable = ['id_user','dominio','empresa','contacto','telefono','telefono2','direccion','email','nit','actividad','plan','vencimiento','metodo_pago','estado'];
 
 
     /**

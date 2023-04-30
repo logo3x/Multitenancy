@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 //agregamos lo siguiente
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Dotenv\Exception\ValidationException;
+
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Mail;
+
+
+
+use App\Models\Cliente;
+use App\Models\Tenant;
 
 class UsuarioController extends Controller
 {
@@ -149,7 +153,25 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
+
+        $cliente = Cliente::where('id_user',$id)->get();
+        //dd($cliente);
+        if (!$cliente->isEmpty()){
+            foreach ($cliente as $client) {
+                $dominio=$client->dominio;
+                $id_cliente=$client->id;
+            }
+
+            Tenant::find($dominio)->delete();
+            Cliente::find($id_cliente)->delete();
+        }
+
+
+
         User::find($id)->delete();
+
+
+
         return redirect()->route('usuarios.index');
     }
 }
