@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClienteApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/cliente/{id_user}', [App\Http\Controllers\ClienteApiController::class,'index']);
+/* Route::put('/cliente/{id_user}', [App\Http\Controllers\ClienteApiController::class,'update']);
+Route::get('/cliente', [App\Http\Controllers\ClienteApiController::class,'show']); */

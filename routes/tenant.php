@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Clientes\Home;
+use App\Http\Controllers\Clientes\ClienteController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -43,6 +44,7 @@ Route::middleware([
         Route::resource('roles',RolController::class);
         Route::resource('usuarios',UsuarioController::class);
         Route::resource('/home',Home::class);
+        Route::resource('/cliente',ClienteController::class);
 
     });
 

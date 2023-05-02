@@ -315,8 +315,16 @@ return [
 
         ['header' => 'account_settings'],
         [
+            'text' => 'Inquilinos',
+            'url'  => 'tenants',
+            'icon' => 'fas fa-building',
+            'can'  => 'Solo Admin' ,
+            'icon_color' => 'info',
+
+        ],
+        [
             'text' => 'Cuenta',
-            'url'  => 'home',
+            'url'  => 'cliente',
             'icon' => 'fas fa-building',
             'can'  => 'ver-cliente' ,
             'icon_color' => 'info',
