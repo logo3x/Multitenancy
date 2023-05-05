@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\Clientes\UsuarioController;
+use App\Http\Controllers\Clientes\RolController;
 
 
 //Spatie
-use App\Http\Controllers\RolController;
+
 use Illuminate\Support\Facades\Auth;
 
 /*

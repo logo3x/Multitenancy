@@ -21,7 +21,7 @@
                                   <table class="table table-striped mt-2">
                                     <thead>
                                         <th style="display: none;">ID</th>
-                                        <th>Nombre</th>
+                                        <th>Nombres</th>
                                         <th>E-mail</th>
                                         <th>Rol</th>
                                         <th>Acciones</th>
@@ -42,7 +42,7 @@
 
                                           <td>
                                             <a class="btn btn-info" href="{{ route('usuarios.edit',$usuario->id) }}">Editar</a>
-                                           
+
                                             {!! Form::open(['class' => 'formulario-eliminar','method' => 'DELETE','route' => ['usuarios.destroy', $usuario->id],'style'=>'display:inline']) !!}
                                                 {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
                                             {!! Form::close() !!}
