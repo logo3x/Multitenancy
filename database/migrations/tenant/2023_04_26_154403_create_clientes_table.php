@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('nit')->nullable();
             $table->string('actividad')->nullable();
             $table->string('plan');
+            $table->date('creacion');
             $table->date('vencimiento');
             $table->string('metodo_pago')->nullable();
             $table->string('estado')->nullable();

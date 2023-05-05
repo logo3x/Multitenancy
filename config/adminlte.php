@@ -324,7 +324,7 @@ return [
         ],
         [
             'text' => 'Cuenta',
-            'url'  => 'cliente',
+            'url'  => 'home',
             'icon' => 'fas fa-building',
             'can'  => 'ver-cliente' ,
             'icon_color' => 'info',

@@ -11,99 +11,175 @@
 @section('content')
 
 
-
     <section class="content container-fluid">
         <div class="row">
+            <div class="float-right">
+
+            </div>
             <div class="col-md-12">
 
+
                 @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
 
-
+                {{-- SI EL USUARIO YA TIENE CLIENTE_DOMINIO SE MUESTRAN LOS DATOS --}}
                 @if ($cliente->count())
 
 
-                    @foreach ($cliente as $client)
-                    <p>Tienes un dominio creada con el estado <strong>{{ $client->estado }}</strong> y registra los siguientes datos</p> <br>
 
+                    <p>Tienes un dominio creada con el estado <strong>{{ $cliente[0]->estado }}</strong> y registra los
+                        siguientes datos</p> <br>
 
-                    <div class="container shadow"><br>
+                    <div class="container shadow mb-6"><br>
+
                         <div class="float-right">
-                            <a class="btn btn-sm btn-success" href="{{ route('home.edit',$client->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Actualizar') }}</a>
+                            <a class="btn btn-sm btn-success" href="{{ route('home.edit', $cliente[0]->id) }}"><i
+                                    class="fa fa-fw fa-edit"></i> {{ __('Actualizar Información') }}</a>
+                                    @if ($cliente[0]->plan=='Gratuita')
+                                    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_GwEa25nRlh.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+                                    @else
+                                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_wci9dxrs.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+                                    @endif
                         </div><br>
                         <div class="row">
-                          <div class="col-sm">
-                            <label for="Usuario">Usuario</label> <br>
-                            {{ $client->user->email }}
-                          </div>
-                          <div class="col-sm">
-                            <label for="Dominio">Dominio</label><br>
-                            <a href="http://{{$client->dominio}}.teamforcex.com.co" target="_blank" rel="noopener noreferrer">{{ $client->dominio }}.teamforcex.com.co</a>
-                          </div>
-                          <div class="col-sm">
-                           <label for="Empresa">Empresa</label><br>
-                           {{ $client->empresa }}
-                          </div>
-                          <div class="col-sm">
-                            <label for="Contacto">Contacto</label><br>
-                            {{ $client->contacto }}
-                          </div>
+                            <div class="col-sm">
+                                <label for="Usuario">Usuario</label> <br>
+                                {{ $cliente[0]->user->email }}
+                            </div>
+                            <div class="col-sm">
+                                <label for="Dominio">Dominio</label><br>
+                                <a href="http://{{ $cliente[0]->dominio }}.teamforcex.com.co" target="_blank"
+                                    rel="noopener noreferrer">{{ $cliente[0]->dominio }}.teamforcex.com.co</a>
+                            </div>
+                            <div class="col-sm">
+                                <label for="Empresa">Empresa</label><br>
+                                {{ $cliente[0]->empresa }}
+                            </div>
+                            <div class="col-sm">
+                                <label for="Contacto">Contacto</label><br>
+                                {{ $cliente[0]->contacto }}
+                            </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-sm">
-                              <label for="Telefono">Telefono</label><br>
-                              {{ $client->telefono }}
+                                <label for="Telefono">Telefono</label><br>
+                                {{ $cliente[0]->telefono }}
                             </div>
                             <div class="col-sm">
-                              <label for="Telefono2">Telefono2</label><br>
-                              {{ $client->telefono2 }}
+                                <label for="Telefono2">Telefono2</label><br>
+                                {{ $cliente[0]->telefono2 }}
                             </div>
                             <div class="col-sm">
-                             <label for="Direccion">Direccion</label><br>
-                             {{ $client->direccion }}
+                                <label for="Direccion">Direccion</label><br>
+                                {{ $cliente[0]->direccion }}
                             </div>
                             <div class="col-sm">
-                              <label for="Email">Email</label><br>
-                              {{ $client->email }}
+                                <label for="Email">Email</label><br>
+                                {{ $cliente[0]->email }}
                             </div>
-                          </div>
-                          <br>
-                          <div class="row">
+                        </div>
+                        <br>
+                        <div class="row">
                             <div class="col-sm">
-                              <label for="Nit">Nit</label><br>
-                              {{ $client->nit }}
-                            </div>
-                            <div class="col-sm">
-                              <label for="Actividad">Actividad</label><br>
-                              {{ $client->actividad }}
+                                <label for="Nit">Nit</label><br>
+                                {{ $cliente[0]->nit }}
                             </div>
                             <div class="col-sm">
-                             <label for="Plan">Plan</label><br>
-                             {{ $client->plan }}
+                                <label for="Actividad">Actividad</label><br>
+                                {{ $cliente[0]->actividad }}
                             </div>
                             <div class="col-sm">
-                              <label for="Metodo Pago">Metodo Pago</label><br>
-                              {{ $client->metodo_pago }}
+                                <label for="Plan">Plan Actual</label><br>
+                                {{ $cliente[0]->plan }} <br>
                             </div>
-                          </div>
-                          <br> <br> <br>
-                          <div class="row">
+                            <div class="col-sm">
+                                <label for="Plan">Vencimiento</label><br>
+                                {{ $cliente[0]->vencimiento }} <br>
+                            </div>
+                        </div>
+
+                        <br> <br> <br>
+                        <div class="row">
                             <div class="col-sm">
 
-                                <form action="{{ route('home.destroy',$client->id) }}"  class="formulario-eliminar" method="POST">
+                                <form action="{{ route('home.destroy', $cliente[0]->id) }}" class="formulario-eliminar"
+                                    method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm " ><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar Dominio') }} </button>
+                                    <button type="submit" class="btn btn-danger btn-sm "><i class="fa fa-fw fa-trash"></i>
+                                        {{ __('Eliminar Dominio') }} </button>
                                 </form>
                             </div>
-                          </div>
-                          <br>
-                      </div>
-                      @endforeach
+                            @if ($cliente[0]->plan=='Gratuita')
+                            <div class="col-sm">
+                                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_R57zxlY9RY.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+                            </div>
+                            @endif
+                        </div>
+
+                        <br>
+                    </div>
+
+                    <br>
+
+        @if ($cliente[0]->plan=='Gratuita')
+
+           <div class="container shadow mt-6">
+
+                        <div class="card w-100 p-3 text-center mt-6">
+                            <div class="card-header">
+                                <h3 class="card-title">Amplia tu sucripcion mira nuestros planes</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class=""></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
+
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item">
+                                            <a href="{{ route('sucripciones.plan1', $cliente[0]) }}"
+                                                rel="noopener noreferrer"><img class="d-block w-100"
+                                                    src="{{ asset('img/plan1.jpg') }}" alt="First slide"></a>
+
+                                        </div>
+                                        <div class="carousel-item active">
+                                            <a href="{{ route('sucripciones.plan2', $cliente[0]) }}"
+                                                rel="noopener noreferrer"><img class="d-block w-100"
+                                                    src="{{ asset('img/plan2.jpg') }}"
+                                                    alt="Second slide"></a>
+                                        </div>
+
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-custom-icon" aria-hidden="true">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </span>
+                                        <span class="sr-only">Anterior</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-custom-icon" aria-hidden="true">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </span>
+                                        <span class="sr-only">Siguiente</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    @endif
 
 
 
@@ -112,12 +188,19 @@
 
 
 
+
+
+
+
+
+
+                    {{-- SI EL USUARIO NO HA CREADO CLIENTE_DOMINIO SE HABILITA EL FORMULARIO --}}
                 @else
                     @includeif('partials.errors')
 
                     <div class="card card-default">
                         <div class="card-header">
-                            <span class="card-title">Crear Cuentas.</span>
+                            <span class="card-title">Cuenta</span>
                         </div>
                         @if ($errors->any())
                             <div class="alert alert-dark alert-dismissible fade show" role="alert">
@@ -133,13 +216,14 @@
 
 
                         <div class="card-body">
+
                             <form method="POST" action="{{ route('home.store') }}" role="form"
                                 enctype="multipart/form-data">
                                 @csrf
 
                                 <input type="hidden" name="id_user" value="{{ auth()->user()->id }}">
-                                <input type="hidden" name="metodo_pago" value="t_credito">
-                                <div class="container-xl">
+                                <input type="hidden" name="metodo_pago" value="">
+                                <div class="container-xl mb-8">
                                     <div class="row justify-content-center align-items-start g-2">
                                         <div class="col">
                                             <div class="input-group mb-3">
@@ -223,23 +307,18 @@
                                         </div>
                                     </div>
 
-                                    <div class="row justify-content-center align-items-start g-2">
+                                    <div class="row justify-content-center align-items-start g-2 mb-2">
                                         <div class="col">
                                             <div class="form-group">
                                                 {{ Form::label('Plan') }}
 
                                                 <div class="form-group">
                                                     <div class="custom-control custom-radio">
-                                                        <input class="custom-control-input" type="radio" id="customRadio1"
-                                                            name="plan" value="free" checked="true">
+                                                        <input class="custom-control-input" type="radio"
+                                                            id="customRadio1" name="plan" value="Gratuito"
+                                                            checked="true">
                                                         <label for="customRadio1"
-                                                            class="custom-control-label">Gratuito(demo)</label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio">
-                                                        <input class="custom-control-input" type="radio" id="customRadio2"
-                                                            name="plan" value="suscripcion1">
-                                                        <label for="customRadio2" class="custom-control-label">Plan
-                                                            suscripcion FULL (sin resctricciones)</label>
+                                                            class="custom-control-label">Gratuito(Demo)</label>
                                                     </div>
                                                 </div>
 
@@ -247,15 +326,17 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            Planes
-                                            <img src="" alt="">
+
+                                            <img src="{{ asset('img/plan-gratuito.jpg') }}" width="500px"
+                                                alt="">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="text-center">
-                                    <footer class="blockquote-footer">
-                                        <button type="submit" class="btn btn-primary">{{ __('Crear') }}</button>
-                                    </footer>
+                                </div> <br>
+                                <div class="text-center mt-6">
+
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-cart-plus"></i> CREAR
+                                        APLICACION</button>
+
                                 </div>
                         </div>
 
@@ -271,58 +352,75 @@
 
         </div>
         </div>
+
+
+
+
+
+
+
+
+
     </section>
-
-
-
-
 @stop
 
 @section('css')
 
+
 @stop
 
 @section('js')
-@if ( Session::get('success')=='Su Dominio ha sido Creado Satisfactoriamente.')
-    <script>
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Felicidades tu dominio se ha generado, Muchas gracias por confiar en nosotros.',
-            showConfirmButton: false,
-            timer: 4500
-            })
-    </script>
-@endif
 
-@if ( Session::get('success')=='El Dominio se ha Eliminado de la Base de Datos')
-    <script>
-        Swal.fire(
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+
+
+
+
+
+
+
+
+    @if (Session::get('success') == 'Su Dominio ha sido Creado Satisfactoriamente.')
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Felicidades tu dominio se ha generado, Muchas gracias por confiar en nosotros.',
+                showConfirmButton: false,
+                timer: 4500
+            })
+        </script>
+    @endif
+
+    @if (Session::get('success') == 'El Dominio se ha Eliminado de la Base de Datos')
+        <script>
+            Swal.fire(
                 'Eliminado!',
                 'El dominio se elimino del registro.',
                 'success'
-                )
+            )
+        </script>
+    @endif
+    <script>
+        $('.formulario-eliminar').submit(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Se eliminara la base de datos ¡No podrás revertir esto.!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminarlo!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
     </script>
-@endif
-<script>
-    $('.formulario-eliminar').submit(function(e){
-        e.preventDefault();
-        Swal.fire({
-        title: '¿Estas seguro?',
-        text: "Se eliminara la base de datos ¡No podrás revertir esto.!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, Eliminarlo!',
-        cancelButtonText: 'Cancelar',
-        }).then((result) => {
-        if (result.isConfirmed) {
-            this.submit();
-        }
-        })
-    });
-</script>
 
 
 @stop

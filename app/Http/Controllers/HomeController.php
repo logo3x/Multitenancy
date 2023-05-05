@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
+ use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -19,11 +20,35 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
+    public function pay(Request $request,Cliente $cliente){
+
+
+        $response = Http::get("https://api.mercadopago.com/v1/payments/$request->payment_id"."?access_token=".config('services.mercadopago.token'));
+        $metodo_pago= $request->payment_type;
+        $response=json_decode($response);
+        $plan = $response->description;
+
+        if(isset($response->error)){
+            if($response->error == 'resource not found'){
+                return redirect()->route('home.index')
+                    ->with('success', 'Ocurrio un error.');
+                }
+        }
+        $status= $response->status;
+
+        if ($status == 'approved') {
+            $cliente->plan= $plan ;
+            $cliente->metodo_pago= $metodo_pago;
+            if($plan=='Suscripcion_6Meses'){$cliente->vencimiento=date('Y-m-d H:i:s',strtotime(now()."+ 6 month"));}
+            if($plan=='Suscripcion_12Meses'){$cliente->vencimiento=date('Y-m-d H:i:s',strtotime(now()."+ 12 month"));}
+            $cliente->save();
+            return redirect()->route('home.index')
+            ->with('success', 'Se Actualizo su plan, Muchas gracias por Confiar en nosotros.');
+        }
+
+    }
+
     public function index()
     {
         $cliente = Cliente::where('id_user','=',auth()->user()->id)->get();
@@ -43,7 +68,7 @@ class HomeController extends Controller
             'telefono' => 'required',
             'email' => 'required',
             'plan' => 'required',
-            'metodo_pago' => 'required',
+
         ],
         [
             'id.required' => 'Debe ingresar un dominio',
@@ -67,7 +92,8 @@ class HomeController extends Controller
             'nit' => $request['nit'],
             'actividad' => $request['actividad'],
             'plan' => $request['plan'],
-            'vencimiento' => now(),
+            'creacion' => now(),
+            'vencimiento' => date('Y-m-d H:i:s',strtotime(now()."+ 1 month")),
             'metodo_pago' => $request['metodo_pago'],
             'estado' =>   'Activa'     ];
 
@@ -162,6 +188,7 @@ class HomeController extends Controller
         return redirect()->route('home.index')
             ->with('success', 'El Dominio se ha Eliminado de la Base de Datos');
     }
+
 
 
 }
