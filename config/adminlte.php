@@ -323,6 +323,14 @@ return [
 
         ],
         [
+            'text' => 'Mi Cuenta',
+            'url'  => 'cliente',
+            'icon' => 'fas fa-building',
+            'can'  => 'ver-cliente-inquilino' ,
+            'icon_color' => 'info',
+
+        ],
+        [
             'text' => 'Cuenta',
             'url'  => 'home',
             'icon' => 'fas fa-building',

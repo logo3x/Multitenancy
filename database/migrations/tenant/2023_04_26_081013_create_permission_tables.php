@@ -140,7 +140,8 @@ class CreatePermissionTables extends Migration
                 //Operaciones sobre Informacion del la empresa (Cliente)
                 'ver-cliente',
                 'editar-cliente',
-                
+                'ver-cliente-inquilino',
+
             ];
 
 
@@ -148,7 +149,7 @@ class CreatePermissionTables extends Migration
                 DB::table("permissions")->insert(['name'=>$permiso,'guard_name'=>'web', ]);
             }
             // se crea el rol Administrador con los permisos basicos
-            $admin_permission=[1,2,3,4,5,6,7,8];
+            $admin_permission=[1,2,3,4,5,6,7,8,10,11];
             $role = Role::create(['name' => 'Administrador']);
             $role->syncPermissions($admin_permission);
             //se toman los datos del usuario logueado y se crea un usuario en el cliente y se le asigna el rol Administrador

@@ -29,14 +29,10 @@ class ClienteController extends Controller
     public function index()
     {
         $email = User::find(1)->pluck('email');
-
         $url=  env('APP_URL').'api/cliente/'.$email[0];
         $response = Http::get($url)->json();
+        $cliente =$response[0];
 
-        //$cliente = Cliente::where('id_user','=',1)->get();
-
-        $cliente =$response;
-        //dd($cliente);
 
         return view('clientes.cliente.home', compact('cliente'));
 

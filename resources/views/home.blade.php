@@ -315,10 +315,10 @@
                                                 <div class="form-group">
                                                     <div class="custom-control custom-radio">
                                                         <input class="custom-control-input" type="radio"
-                                                            id="customRadio1" name="plan" value="Gratuito"
+                                                            id="customRadio1" name="plan" value="Gratuita"
                                                             checked="true">
                                                         <label for="customRadio1"
-                                                            class="custom-control-label">Gratuito(Demo)</label>
+                                                            class="custom-control-label">Gratuito(Demo, despues podras cambiar de plan)</label>
                                                     </div>
                                                 </div>
 

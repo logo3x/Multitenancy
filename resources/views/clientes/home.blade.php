@@ -7,7 +7,26 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <div class="card card-default  alert  alert-dismissible">
+
+
+
+
+        <div class="card-body">
+            <i class="fas fa-bullhorn"></i>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="far fa-window-close"></i></button>
+                Vencimiento del Plan: {{ $cliente['vencimiento'] }}
+                <div class="float-right">
+                    @if ($cliente['plan'] == 'Gratuita')
+                    <img src="{{ asset('img/bannerg-inquilino.jpg') }}" width="500px" height="100px" alt="">
+                    @endif
+                </div>
+        </div>
+
+    </div>
+
+
+
 @stop
 
 @section('css')
@@ -15,5 +34,7 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script>
+        console.log('Hi!');
+    </script>
 @stop
