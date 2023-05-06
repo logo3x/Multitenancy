@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TenantController;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\WebhooksController;
 use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('roles',RolController::class);
     Route::resource('usuarios',UsuarioController::class);
     Route::resource('home',HomeController::class);
+    Route::resource('inquilinos',ClienteController::class);
 
     Route::get('suscripciones1/{cliente}',[SuscripcionController::class, 'suscripcion1'])->name('sucripciones.plan1');
     Route::get('suscripciones2/{cliente}',[SuscripcionController::class, 'suscripcion2'])->name('sucripciones.plan2');

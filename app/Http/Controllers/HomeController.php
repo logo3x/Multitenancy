@@ -127,7 +127,7 @@ class HomeController extends Controller
             'telefono' => 'required',
             'email' => 'required',
             'plan' => 'required',
-            'metodo_pago' => 'required',
+            
         ],
         [
             /* 'id.required' => 'Debe ingresar un dominio',

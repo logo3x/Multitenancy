@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ __('Update') }} Cliente
-@endsection
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Informacion del Cliente</h1>
+@stop
 
 @section('content')
     <section class="content container-fluid">
@@ -13,10 +15,10 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Cliente</span>
+                        <span class="card-title">{{ __('Actualizar') }} Cliente</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('clientes.update', $cliente->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('inquilinos.update', $cliente->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
@@ -28,4 +30,12 @@
             </div>
         </div>
     </section>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

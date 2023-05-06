@@ -19,8 +19,6 @@
                     <div class="container shadow mb-6"><br>
 
                         <div class="float-right">
-                            <a class="btn btn-sm btn-success" href="{{ route('home.edit', $cliente['id']) }}"><i
-                                    class="fa fa-fw fa-edit"></i> {{ __('Actualizar Información') }}</a>
                                     @if ($cliente['plan']=='Gratuita')
                                     <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_GwEa25nRlh.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
                                     @else
@@ -89,13 +87,13 @@
                         <div class="row">
                             <div class="col-sm">
 
-                                <form action="{{ route('home.destroy', $cliente['id']) }}" class="formulario-eliminar"
+                               {{--  <form action="{{ route('home.destroy', $cliente['id']) }}" class="formulario-eliminar"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm "><i class="fa fa-fw fa-trash"></i>
                                         {{ __('Eliminar Dominio') }} </button>
-                                </form>
+                                </form> --}}
                             </div>
                             @if ($cliente['plan']=='Gratuita')
                             <div class="col-sm">
@@ -109,7 +107,7 @@
 
                     <br>
 
-       {{--  @if ($cliente['plan']=='Gratuita')
+        @if ($cliente['plan']=='Gratuita')
 
            <div class="container shadow mt-6">
 
@@ -127,13 +125,13 @@
                                     </ol>
                                     <div class="carousel-inner">
                                         <div class="carousel-item">
-                                            <a href="{{ route('sucripciones.plan1', $cliente[0]) }}"
+                                            <a href="{{ env('APP_URL') }}"
                                                 rel="noopener noreferrer"><img class="d-block w-100"
                                                     src="{{ asset('img/plan1.jpg') }}" alt="First slide"></a>
 
                                         </div>
                                         <div class="carousel-item active">
-                                            <a href="{{ route('sucripciones.plan2', $cliente[0]) }}"
+                                            <a href="{{ env('APP_URL') }}"
                                                 rel="noopener noreferrer"><img class="d-block w-100"
                                                     src="{{ asset('img/plan2.jpg') }}"
                                                     alt="Second slide"></a>
@@ -161,7 +159,7 @@
 
                     </div>
 
-                    @endif --}}
+                    @endif
 
 
 
@@ -173,7 +171,7 @@
 @stop
 
 @section('js')
-
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 
 @stop

@@ -1,14 +1,14 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+
         <div class="form-group">
-            {{ Form::label('id_user') }}
-            {{ Form::text('id_user', $cliente->id_user, ['class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Id User']) }}
+            {{ Form::label('Correo del inquilino propietario') }}
+            {{ Form::text('id_user', $cliente->id_user, ['class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Id User','readonly']) }}
             {!! $errors->first('id_user', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('dominio') }}
-            {{ Form::text('dominio', $cliente->dominio, ['class' => 'form-control' . ($errors->has('dominio') ? ' is-invalid' : ''), 'placeholder' => 'Dominio']) }}
+            {{ Form::text('dominio', $cliente->dominio, ['class' => 'form-control' . ($errors->has('dominio') ? ' is-invalid' : ''), 'placeholder' => 'Dominio', 'readonly']) }}
             {!! $errors->first('dominio', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -57,18 +57,34 @@
             {!! $errors->first('plan', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
+            {{ Form::label('creacion') }}
+            {{ Form::text('creacion', $cliente->creacion, ['class' => 'form-control' . ($errors->has('creacion') ? ' is-invalid' : ''), 'placeholder' => 'Creacion']) }}
+            {!! $errors->first('creacion', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('vencimiento') }}
+            {{ Form::text('vencimiento', $cliente->vencimiento, ['class' => 'form-control' . ($errors->has('vencimiento') ? ' is-invalid' : ''), 'placeholder' => 'Vencimiento']) }}
+            {!! $errors->first('vencimiento', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
             {{ Form::label('metodo_pago') }}
             {{ Form::text('metodo_pago', $cliente->metodo_pago, ['class' => 'form-control' . ($errors->has('metodo_pago') ? ' is-invalid' : ''), 'placeholder' => 'Metodo Pago']) }}
             {!! $errors->first('metodo_pago', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('estado') }}
-            {{ Form::text('estado', $cliente->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
+            <label >Estado(Activa-Inactiva) Actual -></label> {{ $cliente->estado}}
+
+            <select name="estado" class="custom-select custom-select-lg mb-3">
+                <option value="Activa" {{ ( $cliente->estado == 'Activa') ? 'selected' : '' }}>Activa</option>
+                <option value="Inactiva"{{ ( $cliente->estado == 'Inactiva') ? 'selected' : '' }}>Inactiva</option>
+              </select>
+
+            {{-- {{ Form::text('estado', $cliente->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }} --}}
             {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
     </div>
 </div>

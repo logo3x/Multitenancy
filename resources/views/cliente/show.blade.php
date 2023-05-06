@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ $cliente->name ?? "{{ __('Show') Cliente" }}
-@endsection
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Informacion del Cliente</h1>
+@stop
 
 @section('content')
     <section class="content container-fluid">
@@ -11,21 +13,21 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Cliente</span>
+
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('clientes.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('inquilinos.index') }}"> {{ __('Volver') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
-                            <strong>Id User:</strong>
-                            {{ $cliente->id_user }}
+                            <strong>Cuenta de Usuario:</strong>
+                            {{ $cliente->user->email }}
                         </div>
                         <div class="form-group">
-                            <strong>Dominio:</strong>
+                            <strong>Sub Dominio:</strong>
                             {{ $cliente->dominio }}
                         </div>
                         <div class="form-group">
@@ -65,6 +67,14 @@
                             {{ $cliente->plan }}
                         </div>
                         <div class="form-group">
+                            <strong>Creacion:</strong>
+                            {{ $cliente->creacion }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Vencimiento:</strong>
+                            {{ $cliente->vencimiento }}
+                        </div>
+                        <div class="form-group">
                             <strong>Metodo Pago:</strong>
                             {{ $cliente->metodo_pago }}
                         </div>
@@ -78,4 +88,12 @@
             </div>
         </div>
     </section>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

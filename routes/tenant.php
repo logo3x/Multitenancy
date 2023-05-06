@@ -11,6 +11,7 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use App\Http\Controllers\Clientes\UsuarioController;
 use App\Http\Controllers\Clientes\RolController;
 
+use Stancl\Tenancy\Middleware\CheckTenantForMaintenanceMode;
 
 //Spatie
 
@@ -32,6 +33,7 @@ Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
+    CheckTenantForMaintenanceMode::class,
 ])->group(function () {
     Route::get('/', function () {
         return view('clientes.welcome');

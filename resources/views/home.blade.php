@@ -126,6 +126,7 @@
 
                     <br>
 
+                   {{--  SI EL PLAN ES GRATUITO MUESTRE CARRUSEL DE IMAGENES CON PLANES DISPONIBLES --}}
         @if ($cliente[0]->plan=='Gratuita')
 
            <div class="container shadow mt-6">
@@ -186,21 +187,15 @@
 
 
 
-
-
-
-
-
-
-
-
                     {{-- SI EL USUARIO NO HA CREADO CLIENTE_DOMINIO SE HABILITA EL FORMULARIO --}}
                 @else
                     @includeif('partials.errors')
 
                     <div class="card card-default">
                         <div class="card-header">
-                            <span class="card-title">Cuenta</span>
+                            <span class="card-title">Que agradable es ser su elección y para continuar con la creacion de tu
+                                aplicación es necesario unos cuantos datos. Agradecemos mucho su confianza en nuestros productos.
+                            </span>
                         </div>
                         @if ($errors->any())
                             <div class="alert alert-dark alert-dismissible fade show" role="alert">
@@ -375,13 +370,6 @@
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 
-
-
-
-
-
-
-
     @if (Session::get('success') == 'Su Dominio ha sido Creado Satisfactoriamente.')
         <script>
             Swal.fire({
@@ -394,6 +382,8 @@
         </script>
     @endif
 
+
+    {{-- MESAJE DE PREGUNTA Y CONFIRMACION DE ELIMINACION DE CLIENTE INQUILINO --}}
     @if (Session::get('success') == 'El Dominio se ha Eliminado de la Base de Datos')
         <script>
             Swal.fire(

@@ -18,7 +18,7 @@
                 Vencimiento del Plan: {{ $cliente['vencimiento'] }}
                 <div class="float-right">
                     @if ($cliente['plan'] == 'Gratuita')
-                    <img src="{{ asset('img/bannerg-inquilino.jpg') }}" width="500px" height="100px" alt="">
+                    <a href="{{ env('APP_URL') }}" target="_black"><img src="{{ asset('img/bannerg-inquilino.jpg') }}" width="500px" height="100px" alt=""></a>
                     @endif
                 </div>
         </div>

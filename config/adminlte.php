@@ -316,10 +316,10 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Inquilinos',
-            'url'  => 'tenants',
-            'icon' => 'fas fa-building',
+            'url'  => 'inquilinos',/* 'tenants', */
+            'icon' => 'fas fa-campground',
             'can'  => 'Solo Admin' ,
-            'icon_color' => 'info',
+            'icon_color' => 'warning',
 
         ],
         [
@@ -327,7 +327,7 @@ return [
             'url'  => 'cliente',
             'icon' => 'fas fa-building',
             'can'  => 'ver-cliente-inquilino' ,
-            'icon_color' => 'info',
+            'icon_color' => 'orange',
 
         ],
         [
